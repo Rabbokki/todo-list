@@ -33,7 +33,6 @@ function App() {
       const titles = response.data.map(x => x.title);
       localStorage.setItem('title',JSON.stringify(titles));
       setTodo(titles)
-      
     })
     .catch(error => {
       console.log('axios 에러남' , error);
@@ -48,7 +47,7 @@ function App() {
     todoList.sort().reverse();
   }
   useEffect(()=>{
-    const todos = JSON.parse(localStorage.getItem("title"))
+    const todos = JSON.parse(localStorage.getItem("title")) || null;
     setTodoList(todos);
   },[])
   let navigate = useNavigate();
@@ -82,7 +81,7 @@ function App() {
       <div>
         <ul>
           {
-            todoList.map((x,i)=>{
+            todoList?.map((x,i)=>{
               return (
               <div>
                 <li key={i}>
